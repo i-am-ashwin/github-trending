@@ -1,7 +1,32 @@
+"use client";
 import RepoList from "@/components/RepoList";
+import { useStarredRepos } from "@/context/StarredRepoProvider";
 import { data } from "@/data/mock";
-
+import { Repository } from "@/types/Repository";
+import React from "react";
 export default function StarredRepos() {
+  const { starredRepos, toggleStar } = useStarredRepos();
+  const [selectedLanguage, setSelectedLanguage] = React.useState<string>("");
+
+  const filteredStarredRepos = React.useMemo(() => {
+    if (selectedLanguage === "") {
+      return starredRepos;
+    }
+    return starredRepos.filter(repo => 
+      repo.language?.toLowerCase() === selectedLanguage.toLowerCase()
+    );
+  }, [starredRepos, selectedLanguage]);
+
+  const handleLanguageChange = (language: string) => {
+    setSelectedLanguage(language);
+  };
+
+  const handleToggleStar = (repoId: string) => {
+    const repo = starredRepos.find(r => r.id === repoId);
+    if (repo) {
+      toggleStar(repo);
+    }
+  };
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -12,7 +37,7 @@ export default function StarredRepos() {
           </span>
         </h2>
       </div>
-      <RepoList repos={data} />
+      <RepoList repos={filteredStarredRepos} />
     </div>
   );
 }
