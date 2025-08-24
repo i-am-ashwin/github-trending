@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
-
-
+import { StarredReposProvider } from "@/context/StarredRepoProvider";
 
 export const metadata: Metadata = {
   title: "GitHub Trending Repositories",
@@ -18,12 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-      <div className="min-h-screen bg-pink-100 text-black">
-        <Header />
-        <main className="max-w-6xl mx-auto px-4 py-4">
-          {children}
-        </main>
-      </div>
+        <StarredReposProvider>
+          <div className="min-h-screen bg-pink-100 text-black">
+            <Header />
+            <main className="max-w-6xl mx-auto px-4 py-4">{children}</main>
+          </div>
+        </StarredReposProvider>
         <Analytics />
       </body>
     </html>
