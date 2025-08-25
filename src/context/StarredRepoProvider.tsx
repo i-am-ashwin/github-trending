@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
-import { Repository } from '@/types/repository-new';
+import { Repository } from '@/types/repository';
 
 const StarredReposContext = createContext<{
   starredRepos: Repository[];

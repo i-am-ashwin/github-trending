@@ -1,6 +1,6 @@
-import { GitHubRepository, GitHubSearchResponse } from "@/types/gitHubRepository-new";
+import { GitHubRepository, GitHubSearchResponse } from "@/types/gitHubRepository";
 import { MAX_REPOS_PER_PAGE } from "./constants";
-import { Repository } from "@/types/repository-new";
+import { Repository } from "@/types/repository";
 
 
 
