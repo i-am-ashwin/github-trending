@@ -1,7 +1,8 @@
 "use client";
+import { LanguageSelection } from "@/components/LanguageSelection";
 import RepoList from "@/components/RepoList";
 import { fetchRepositories, transformGitHubRepo } from "@/lib/github";
-import { Repository } from "@/types/Repository";
+import { Repository } from "@/types/repository";
 import React from 'react';
 export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = React.useState<string>("");
@@ -63,6 +64,7 @@ export default function Home() {
             ({repositories.length} {repositories.length === 1 ? "repository" : "repositories"})
           </span>
         </h2>
+        <LanguageSelection selectedLanguage={selectedLanguage} onLanguageChange={setSelectedLanguage} />
       </div>
         <RepoList repos={repositories} onLoadMore={handleLoadMore} hasMore={true} isLoadingMore={loadingMore} />
 

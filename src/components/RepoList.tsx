@@ -1,4 +1,4 @@
-import { Repository } from "@/types/Repository";
+import { Repository } from "@/types/repository";
 import RepoCard from "./RepoCard";
 import { motion } from "motion/react"
 interface RepoListProps {

@@ -1,5 +1,5 @@
 export const programmingLanguages = [
-  "All Languages",
+  "All",
   "JavaScript",
   "TypeScript", 
   "Python",

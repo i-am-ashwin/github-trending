@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Repository } from '@/types/Repository';
+import { Repository } from '@/types/repository';
 import { Star, GitFork, Square, ExternalLink } from 'lucide-react';
 import { programmingLanguageColors } from '@/lib/languages';
 import { useStarredRepos } from '@/context/StarredRepoProvider';
