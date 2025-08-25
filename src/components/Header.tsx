@@ -15,7 +15,7 @@ export default function Header() {
           <nav className="flex space-x-2 bg-lime-300 p-2 border-2 border-black">
             <Link href="/">
               <button
-                className={`px-4 py-2 text-sm text-black font-bold border-2 border-black transition-all hover:bg-purple-200 ${
+                className={`px-4 py-2 text-sm text-black font-bold border-2 border-black transition-all hover:bg-purple-200 cursor-pointer ${
                   pathname === '/' 
                     ? 'bg-yellow-300' 
                     : 'bg-white hover:bg-purple-100'
@@ -27,7 +27,7 @@ export default function Header() {
             
             <Link href="/starred">
               <button
-                className={`px-4 py-2 text-sm font-bold text-black border-2 border-black transition-all hover:bg-purple-200 ${
+                className={`px-4 py-2 text-sm font-bold text-black border-2 border-black transition-all hover:bg-purple-200 cursor-pointer ${
                   pathname === '/starred' 
                     ? 'bg-yellow-300' 
                     : 'bg-white hover:bg-purple-100'

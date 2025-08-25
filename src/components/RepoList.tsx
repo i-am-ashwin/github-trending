@@ -11,14 +11,14 @@ export default function RepoList({ repos, onLoadMore, hasMore, isLoadingMore }: 
     return (
     <div className="space-y-4">
 
-        <div>
+          <motion.div layout className="grid gap-4">
             {repos.map((repo, index) => (
                 <RepoCard
                 key={repo.id}
                 repo={repo}
                 index={index} />
             ))}
-        </div>
+        </motion.div>
               {hasMore && onLoadMore && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ export default function RepoList({ repos, onLoadMore, hasMore, isLoadingMore }: 
           <button
             onClick={onLoadMore}
             disabled={isLoadingMore}
-            className="px-8 py-4 bg-lime-300 border-4 border-black shadow-brutal-md hover:shadow-brutal-lg hover:bg-lime-400 font-black text-lg text-black transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-brutal-md disabled:hover:bg-lime-300"
+            className="cursor-pointer px-8 py-4 bg-lime-300 border-4 border-black shadow-[6px 6px 0px 0px rgba(0,0,0,1)] hover:shadow-[8px 8px 0px 0px rgba(0,0,0,1)] hover:bg-lime-400 font-black text-lg text-black transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-[6px 6px 0px 0px rgba(0,0,0,1)] disabled:hover:bg-lime-300"
           >
             {isLoadingMore ? (
               <span className="flex items-center gap-2">

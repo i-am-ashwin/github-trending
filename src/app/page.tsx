@@ -66,9 +66,9 @@ export default function Home() {
   return (
  <div className="space-y-4">
         <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-black text-black bg-cyan-300 px-6 py-3 border-4 border-black shadow-brutal-md">
+        <h2 className="text-3xl font-black text-black bg-cyan-300 px-6 py-3 border-4 border-black shadow-[6px 6px 0px 0px rgba(0,0,0,1)]">
           All Repositories
-          <span className="ml-3 text-lg font-bold text-black bg-white px-3 py-1 border-2 border-black shadow-brutal-xs">
+          <span className="ml-3 text-lg font-bold text-black bg-white px-3 py-1 border-2 border-black shadow-[2px 2px 0px 0px rgba(0,0,0,1)]">
             ({repositories.length} {repositories.length === 1 ? "repository" : "repositories"})
           </span>
         </h2>
