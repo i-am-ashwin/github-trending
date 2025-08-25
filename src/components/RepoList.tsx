@@ -1,11 +1,14 @@
+import { Repository } from "@/types/Repository";
 import RepoCard from "./RepoCard";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function RepoList({ repos }: { repos: any[] }) {
+export default function RepoList({ repos }: { repos: Repository[] }) {
     return (
         <div>
-            {repos.map(repo => (
-                <RepoCard key={repo.id} repo={repo} />
+            {repos.map((repo, index) => (
+                <RepoCard
+            key={repo.id}
+            repo={repo}
+            index={index} />
             ))}
         </div>
     );

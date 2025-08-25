@@ -1,43 +1,61 @@
 "use client";
 
-import { LOCAL_STORAGE_KEY } from '@/lib/constants';
-import { Repository } from '@/types/Repository';
-import React from 'react';
+import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
+import { Repository } from '@/types/repository';
 
-const StarredReposContext = React.createContext<{
+const StarredReposContext = createContext<{
   starredRepos: Repository[];
+  starredRepoIds: string[];
   toggleStar: (repo: Repository) => void;
+  isStarred: (repoId: string) => boolean;
 }>({
   starredRepos: [],
+  starredRepoIds: [],
   toggleStar: () => {},
+  isStarred: () => false,
 });
 
-export const useStarredRepos = () => React.useContext(StarredReposContext);
+export const useStarredRepos = () => useContext(StarredReposContext);
 
 interface StarredReposProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function StarredReposProvider({ children }: StarredReposProviderProps) {
-  const [starredRepos, setStarredRepos] = React.useState<Repository[]>([]);
+  const [starredRepos, setStarredRepos] = useState<Repository[]>([]);
 
-  React.useEffect(() => {
-    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+  useEffect(() => {
+    const stored = localStorage.getItem('starredRepos');
     if (stored) {
-      setStarredRepos(JSON.parse(stored));
+        const parsedRepos = JSON.parse(stored);
+          setStarredRepos(parsedRepos);
     }
   }, []);
 
-  const toggleStar = React.useCallback((repo: Repository) => {
-    const newStarredRepos = starredRepos.find(r => r.id === repo.id)
-      ? starredRepos.filter(r => r.id !== repo.id)
+  const toggleStar = (repo: Repository) => {
+    const isCurrentlyStarred = starredRepos.some(starredRepo => starredRepo.id === repo.id);
+    
+    const newStarredRepos = isCurrentlyStarred
+      ? starredRepos.filter(starredRepo => starredRepo.id !== repo.id)
       : [...starredRepos, repo];
-
+    
     setStarredRepos(newStarredRepos);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newStarredRepos));
-  }, [starredRepos]);
+    localStorage.setItem('starredRepos', JSON.stringify(newStarredRepos));
+  };
+
+  const isStarred = (repoId: string): boolean => {
+    return starredRepos.some(repo => repo.id === repoId);
+  };
+
+  const starredRepoIds = starredRepos.map(repo => repo.id);
+
   return (
-    <StarredReposContext.Provider value={{ starredRepos, toggleStar }}>
+    <StarredReposContext.Provider value={{ 
+      starredRepos, 
+      starredRepoIds, 
+      toggleStar, 
+      isStarred 
+    }}>
       {children}
     </StarredReposContext.Provider>
   );

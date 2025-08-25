@@ -1,12 +1,13 @@
 "use client";
 import RepoList from "@/components/RepoList";
 import { data } from "@/data/mock";
-import { fetchRepositories } from "@/lib/github";
+import { fetchRepositories, transformGitHubRepo } from "@/lib/github";
 import { GitHubRepository } from "@/types/GithubRepository";
+import { Repository } from "@/types/Repository";
 import React from 'react';
 export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = React.useState<string>("");
-  const [repositories, setRepositories] = React.useState<GitHubRepository[]>([]);
+  const [repositories, setRepositories] = React.useState<Repository[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [error, setError] = React.useState<string | null>(null);
@@ -14,7 +15,8 @@ export default function Home() {
     try {
       setLoading(true);
       const githubRepos = await fetchRepositories(page, language);
-      setRepositories(prev => [...prev, ...githubRepos]);
+      const transformedRepos = githubRepos.map(transformGitHubRepo);
+      setRepositories(prev => [...prev, ...transformedRepos]);
       setLoading(false)
     }
     catch(err) {
