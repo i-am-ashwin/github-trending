@@ -1,5 +1,10 @@
 "use client";
 import { LanguageSelection } from "@/components/LanguageSelection";
+import  LoadingState  from "@/components/LoaderState";
+import  ErrorState  from "@/components/ErrorState";
+import  EmptyState  from "@/components/EmptyState";
+
+
 import RepoList from "@/components/RepoList";
 import { fetchRepositories, transformGitHubRepo } from "@/lib/github";
 import { Repository } from "@/types/repository";
@@ -50,10 +55,13 @@ export default function Home() {
     }
   };
   if(loading) {
-    return <div>Loading...</div>;
+    return <LoadingState />;
   }
   if(error) {
-    return <div>Error Loading Repositories</div>;
+    return <ErrorState error={error} />;
+  }
+  if(repositories.length === 0) {
+    return <EmptyState isAllRepo={true} />;
   }
   return (
  <div className="space-y-4">
