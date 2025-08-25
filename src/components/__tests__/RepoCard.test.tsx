@@ -34,8 +34,6 @@ describe('RepoCard', () => {
   const mockToggleStar = jest.fn()
   const defaultProps = {
     repo: createMockRepository(),
-    isStarred: false,
-    onToggleStar: mockToggleStar,
     index: 0,
   }
 

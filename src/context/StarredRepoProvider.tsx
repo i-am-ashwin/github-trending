@@ -2,6 +2,7 @@
 
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { Repository } from '@/types/repository';
+import { LOCAL_STORAGE_KEY } from '@/lib/constants';
 
 const StarredReposContext = createContext<{
   starredRepos: Repository[];
@@ -25,7 +26,7 @@ export function StarredReposProvider({ children }: StarredReposProviderProps) {
   const [starredRepos, setStarredRepos] = useState<Repository[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('starredRepos');
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (stored) {
         const parsedRepos = JSON.parse(stored);
           setStarredRepos(parsedRepos);
@@ -40,7 +41,7 @@ export function StarredReposProvider({ children }: StarredReposProviderProps) {
       : [...starredRepos, repo];
     
     setStarredRepos(newStarredRepos);
-    localStorage.setItem('starredRepos', JSON.stringify(newStarredRepos));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newStarredRepos));
   };
 
   const isStarred = (repoId: string): boolean => {

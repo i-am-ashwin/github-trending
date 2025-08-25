@@ -32,7 +32,7 @@ export default function RepoList({ repos, onLoadMore, hasMore, isLoadingMore }: 
           >
             {isLoadingMore ? (
               <span className="flex items-center gap-2">
-                <div className="w-5 h-5 border-2 border-black  animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-black  animate-spin"></div>
                 Loading...
               </span>
             ) : (
