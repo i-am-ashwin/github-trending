@@ -2,7 +2,7 @@
 import { LanguageSelection } from "@/components/LanguageSelection";
 import RepoList from "@/components/RepoList";
 import { useStarredRepos } from "@/context/StarredRepoProvider";
-import { Repository } from "@/types/Repository";
+import { Repository } from "@/types/repository-new";
 import React from "react";
 export default function StarredRepos() {
   const { starredRepos } = useStarredRepos();
