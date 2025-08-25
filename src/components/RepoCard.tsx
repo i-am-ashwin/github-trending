@@ -30,7 +30,7 @@ export default function RepoCard({ repo, index }: RepoCardProps) {
         y: -4,
         transition: { type: "spring", stiffness: 400, damping: 25 } 
       }}
-      className="bg-white border-2 border-black p-6 shadow-brutal-lg hover:shadow-brutal-xl"
+      className="bg-white border-2 border-black p-6 shadow-[8px 8px 0px 0px rgba(0,0,0,1)] hover:shadow-[12px 12px 0px 0px rgba(0,0,0,1)]"
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -94,7 +94,7 @@ export default function RepoCard({ repo, index }: RepoCardProps) {
             transition: { duration: 0.1 }
           }}
           onClick={() => toggleStar(repo)}
-          className={`p-3 border-2 border-black shadow-brutal-sm hover:shadow-brutal-md ${
+          className={`p-3 border-2 border-black shadow-[4px 4px 0px 0px rgba(0,0,0,1)] hover:shadow-[6px 6px 0px 0px rgba(0,0,0,1)] ${
             starredRepoIds.includes(repo.id)
               ? 'text-black bg-yellow-300 hover:bg-yellow-400'
               : 'text-black bg-white hover:bg-yellow-100'

@@ -10,7 +10,7 @@ export function LanguageSelection({ selectedLanguage, onLanguageChange }: Langua
   return (
         <Select.Root value={selectedLanguage} onValueChange={onLanguageChange}>
           <Select.Trigger
-            className="inline-flex h-[48px] w-[160px] items-center justify-between gap-2 bg-orange-300 px-4 py-2 text-sm font-bold text-black border-4 border-black shadow-brutal-sm outline-none hover:bg-orange-400 hover:shadow-brutal-md focus:shadow-brutal-md transition-all duration-200"
+            className="inline-flex h-[48px] w-[160px] items-center justify-between gap-2 bg-orange-300 px-4 py-2 text-sm font-bold text-black border-4 border-black shadow-[4px 4px 0px 0px rgba(0,0,0,1)] outline-none hover:bg-orange-400 hover:shadow-[6px 6px 0px 0px rgba(0,0,0,1)] focus:shadow-[6px 6px 0px 0px rgba(0,0,0,1)] transition-all duration-200"
             aria-label="Filter by language"
           >
             <Select.Value placeholder="Languages" />
@@ -19,7 +19,7 @@ export function LanguageSelection({ selectedLanguage, onLanguageChange }: Langua
             </Select.Icon>
           </Select.Trigger>
           <Select.Portal>
-            <Select.Content className="overflow-hidden bg-white border-4 border-black shadow-brutal-lg max-h-[300px]">
+            <Select.Content className="overflow-hidden bg-white border-4 border-black shadow-[8px 8px 0px 0px rgba(0,0,0,1)] max-h-[300px]">
               <Select.Viewport className="p-2">
                 <Select.Group>
                   {programmingLanguages.map((language) => (

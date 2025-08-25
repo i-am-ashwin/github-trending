@@ -2,8 +2,9 @@
 import { LanguageSelection } from "@/components/LanguageSelection";
 import RepoList from "@/components/RepoList";
 import { useStarredRepos } from "@/context/StarredRepoProvider";
-import { Repository } from "@/types/repository";
 import React from "react";
+import  EmptyState  from "@/components/EmptyState";
+
 export default function StarredRepos() {
   const { starredRepos } = useStarredRepos();
   const [selectedLanguage, setSelectedLanguage] = React.useState<string>("");
@@ -16,7 +17,11 @@ export default function StarredRepos() {
       (repo) => repo.language?.toLowerCase() === selectedLanguage.toLowerCase()
     );
   }, [starredRepos, selectedLanguage]);
-
+if(starredRepos.length === 0) {
+    return (
+        <EmptyState isAllRepo={false} />
+    )
+}
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
