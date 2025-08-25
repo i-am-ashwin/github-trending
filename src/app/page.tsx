@@ -1,8 +1,6 @@
 "use client";
 import RepoList from "@/components/RepoList";
-import { data } from "@/data/mock";
 import { fetchRepositories, transformGitHubRepo } from "@/lib/github";
-import { GitHubRepository } from "@/types/GithubRepository";
 import { Repository } from "@/types/Repository";
 import React from 'react';
 export default function Home() {
@@ -11,23 +9,45 @@ export default function Home() {
   const [loading, setLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [error, setError] = React.useState<string | null>(null);
-  const loadRepositories = React.useCallback(async (page: number, language: string = selectedLanguage) => {
+  const [loadingMore, setLoadingMore] = React.useState(false);
+
+  const loadRepositories = React.useCallback(async (page: number, isInitial: boolean = false, language: string = selectedLanguage) => {
     try {
-      setLoading(true);
+      if (isInitial) {
+        setLoading(true);
+        setCurrentPage(1);
+      } else {
+        setLoadingMore(true);
+      }
+      setError(null);
+      
       const githubRepos = await fetchRepositories(page, language);
       const transformedRepos = githubRepos.map(transformGitHubRepo);
-      setRepositories(prev => [...prev, ...transformedRepos]);
-      setLoading(false)
-    }
-    catch(err) {
-      console.log(err)
+      
+      if (isInitial) {
+        setRepositories(transformedRepos);
+      } else {
+        setRepositories(prev => [...prev, ...transformedRepos]);
+      }
+      
+      setCurrentPage(page);
+    } catch (err) {
+      setError('Failed to load repositories. Please try again later.');
+      console.error('Error loading repositories:', err);
+    } finally {
       setLoading(false);
-      setError('Error Loading Repo')
+      setLoadingMore(false);
     }
-  },[selectedLanguage]);
+  }, [selectedLanguage]);
   React.useEffect(() => {
-    loadRepositories(1, selectedLanguage);
-  }, [selectedLanguage,loadRepositories]);
+    loadRepositories(1, true, selectedLanguage);
+  }, [selectedLanguage, loadRepositories]);
+
+  const handleLoadMore = () => {
+    if (!loadingMore) {
+      loadRepositories(currentPage + 1);
+    }
+  };
   if(loading) {
     return <div>Loading...</div>;
   }
@@ -44,8 +64,8 @@ export default function Home() {
           </span>
         </h2>
       </div>
-        <RepoList repos={repositories} />
-  
+        <RepoList repos={repositories} onLoadMore={handleLoadMore} hasMore={true} isLoadingMore={loadingMore} />
+
  </div>
   );
 }

@@ -37,7 +37,7 @@ export default function StarredRepos() {
           </span>
         </h2>
       </div>
-      <RepoList repos={filteredStarredRepos} />
+      <RepoList repos={filteredStarredRepos} hasMore={false} />
     </div>
   );
 }
