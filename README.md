@@ -1,20 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Github Trending App
+A next.js based web application that lists trending GitHub repositories and enables users to star them
+## Features
 
-## Trending Repositories
+- **Repositories Listing**: View a list of trending GitHub repositories with details like stars, forks, and description.
+- **Starred Repositories**: Keep track of your favorite repositories by starring them.
 
-First, run the development server:
+## What Gets Analyzed
 
+
+## Tech Stack
+
+**Frontend**
+- Next.js with TypeScript
+- React Context for state management
+- React with hooks
+- Tailwind CSS for styling
+- Jest + React Testing Library
+
+
+## Getting Started
+
+### Prerequisites
+- Node.js LTS
+### Installation
+
+1. Clone the repository
 ```bash
-npm run dev
-
+git clone <repository-url>
+cd github-trending
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Build and run the application using node
+```bash
+npm install
+npm run dev
+```
+### Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[https://github-trending-gamma.vercel.app/](https://github-trending-gamma.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Deployment
 
-This app can be viewed on [https://github-trending-gamma.vercel.app/](https://github-trending-gamma.vercel.app/)
+## Testing
+
+Run the test suite:
+```bash
+# Frontend tests
+npm run test
+```
+
+## Project Structure
+
+```
+├── frontend/src
+│           ├── components/     # React components
+│           ├── app/            # Next.js pages
+│           ├── lib/            # Stores and utility functions
+│           ├── context/      # React Context Providers
+│           └── __tests__/      # Test files
+└── README.md
+```
+
